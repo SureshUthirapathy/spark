@@ -1,0 +1,227 @@
+﻿Welcome to the Big Data analytic project using Apache Spark.
+
+ 
+
+ Instructions :
+
+ 
+
+    * This project needs to be completed in spark environment using either Scala or PySpark
+    * The schema of the dataset needs to match as given in the next section.
+    * The file names to be saved should match EXACTLY the name provided in the instruction including the file extension. i.e. 'file_name.csv'
+    * The records should be ORDERED as per the instruction.
+    * All the files should be saved along with header information.
+
+ 
+
+    Candidates Using Online IDE:
+
+ 
+
+        * Click on Project > Install to install the necessary packages.
+        * Once the HackerRank environment is up, use the terminal to bring up scala or pyspark.
+
+        * Write your code in answer.py file [For PySpark] (or) you can directly write the code in terminal and execute it 
+
+        * If you're using terminal type 'pyspark' in terminal to bring up pyspark. Similarly, type 'spark-shell' to bring up scala.
+
+        * After done with the coding don't forget to execute the answer.py file using  python3  answer.py  in the terminal.
+
+        * To check your answer run using Project > Run (or) Run Tests. Submit the test after the expected result has achieved.
+
+ 
+
+Data Preparation :
+
+ 
+
+Before starting with analysis, data needs to be cleaned and prepared. The needed steps are detailed below.
+
+Step 1 - Read the raw data from 'Automobile_data.csv' and store it in a data frame with the below-mentioned schema. The column name and datatypes should match as given below
+
+Step 2 - Check for records with missing value in the column. 
+
+Step 3 - Check for the na values (here it is '?') and fill it with mean (or) mode according to column type.
+
+Step 4 - Convert the price , horsepower ,.etc column(s) to numerical(double) data-type & drop the price column with 'na' values.
+
+Step 5 - Save the cleaned file to 'final_data.csv'. The data available at this step will be used for analytics.
+
+
+-------------------------------------------------------------------------------------
+|Col.No| Col.Name         |   Col.Description                        | Col.Datatype |
+-------------------------------------------------------------------------------------
+|1     |symboling         |Safety Scale from -3(safest) to 3(risky)  | integer      |
+|2     |normalized-losses |average loss per car per year             | integer      |
+|3     |make              |Maker of the car                          | string       |
+|4     |fuel-type         |Type of fuel used in car                  | string       |
+|5     |aspiration        |Engine's aspiration type                  | string       |
+|6     |num-of-doors      |No-of doors in car                        | string       |
+|7     |body-style        |Type of body                              | string       |
+|8     |drive-wheels      |Type of driving wheels                    | string       |
+|9     |engine-location   |Location of the engine                    | string       |
+|10    |wheel-base        |Wheel-base measurement                    | double       |
+|11    |length            |Length of the car                         | double       |
+|12    |width             |Width of the car                          | double       |
+|13    |height            |Height of the car                         | double       |
+|14    |curb-weight       |Curb-weight of the car                    | integer      |
+|15    |engine-type       |Engine-type of the car                    | string       |
+|16    |num-of-cylinders  |No. of cylinders medals won               | string       |
+|17    |engine-size       |Engine size or capacity                   | integer      |
+|18    |fuel-system       |Type of Fuel system used in the car       | string       |
+|19    |bore              |Boring Diameter of the cylinder           | double	    |
+|20    |stroke            |Stroke of the engine                      | double       |
+|21    |compression-ratio |Compression-ratio of the cylinder         | double       |
+|22    |horsepower        |Horsepower of the engine                  | double       |
+|23    |peak-rpm          |Max rpm acheived by the engine            | double       |
+|24    |city-mpg          |mpg of the car in city                    | integer      |
+|25    |highway-mpg       |mpg of the car in highways                | integer      |
+|26    |price             |Price of the car                          | double       |
+-------------------------------------------------------------------------------------
+
+Time for some analysis.
+
+Question 1:
+
+What are the distinct maker's names? Save results to CSV file named 'distinct_makers.csv' along with header information.
+
+Sample submission format:
++---------------------+
+|                make |
++---------------------+
+|              maker 1|
+|              maker 2|
+|                 .   |
+|                 .   |
+|              maker N|
++---------------------+
+ 
+Question 2:
+
+What are the top 10 cars in terms of city-mpg? Order the results in the order of city-mpg. Save results to CSV file named 'top_10_city_mpg.csv' along with header information.
+
+Sample submission format:
++----------+-----------+
+|     make |   city-mpg|
++----------+-----------+
+|  maker 1 |         50|
+|  maker 2 |         45|
+|    .     |        .  |
+|    .     |        .  |
+| maker 10 |         31|
++----------+-----------+
+
+Question 3:
+
+What are the top 10 cars in terms of mpg ? Order the results in the order of mpg . Save results to csv file named 'top_10_mpg.csv' along with header information.
+
+(HINT : mpg = (ciy_mpg + highway_mpg) / 2)
+
+Sample submission format:
++-------------+-----------+
+|        make |       mpg |
++-------------+-----------+
+|     maker 1 |         39|
+|     maker 2 |         34|
+|      .      |          .|
+|      .      |          .|
+|     maker 10|         15|
++-------------+-----------+
+
+Question 4:
+
+What are the top 10 prices of the available cars ? Order the results in descending. Save the results to csv named 'top_10_price.csv' along with the header information.
+
+Sample submission format:
++----------------+-----------+
+|            make|      price|
++----------------+-----------+
+|        maker 1 |      34520|
+|        maker 2 |      32000|
+|         .      |      .    |
+|         .      |      .    |
+|        maker 10|      18000|
++----------------+-----------+
+
+Question 5:
+
+Classify the cars by symboling as given below. Add the classification to a new column "Safety".
+   symboling    > 0  - "Risky"
+   symboling    = 0  - "Neutral"
+   symboling    < 0  - "Safe"
+
+Group the variants of car prices based on new column 'Safety' and order them by count ascending. Save the file as csv to 'safety.csv' along with column headers.
+
+Sample submission format:
++-----------+-----+
+|     Safety|count|
++-----------+-----+
+|      Risky|    9|
+|    Neutral|   99|
+|       Safe|  199|
++-----------+-----+
+
+Question 6:
+
+What is the correlation between mpg and curb-weight . Save the results to 'corr.csv' along with header information.
+
+Sample submission format:
++--------------------+
+|         correlation|
++--------------------+
+|-0.08676785456456455|
++--------------------+
+
+Question 7:
+
+Who are the makers of the cars which have four cylinders in thier car. Save the results to 'four_cylinder.csv' along with header information.
+
+Sample submission format:
++-----------------+
+|            make |
++-----------------+
+|          maker 1|
+|            .    |
+|            .    |
+|          maker n|
++-----------------+
+
+Question 8:
+
+Classify the cars by price as given below. Add the classification to a new column "title".
+   price      >= 25000             - "TopClass"
+   price      >= 10000 and <25000  - "Mid-Class"
+   price      <  10000             - "BudgetClass"
+
+Group the variants of car prices based on new column 'title' and order them by count ascending. Save the file as csv to 'car_class.csv' along with column headers.
+
+Sample submission format:
++-----------+-----+
+|      title|count|
++-----------+-----+
+|   TopClass|    9|
+|  Mid-Class|   99|
+|BudgetClass|  199|
++-----------+-----+
+
+Question 9:
+
+What is the average(mean), minimum and maximum mpg of cars listed . Write the information to a CSV file 'stat.csv' along with the header information.
+
+Sample submission format:
++------+------+------+
+|avgMpg|minMpg|maxMpg|
++------+------+------+
+|    28|    17|    39|
++------+------+------+
+
+Question 10:
+
+Use the data built for question 5(Safety category) . Which maker has the most safe cars ? Save the results to 'safe_maker.csv' along with the header information.
+
+Sample submission format:
++------+------+
+|  make| total|
++------+------+
+|  audi|     7|
++------+------+
